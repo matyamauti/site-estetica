@@ -1,0 +1,85 @@
+/* A régua só existe com movimento. Desde 21/09/2026 aparece também
+   no celular, compacta, dentro da margem lateral (20px a 375): as
+   animações do celular são as mesmas do desktop. */
+.trilho {
+  display: none;
+}
+
+html[data-motion='on'] .trilho {
+  position: fixed;
+  z-index: var(--z-header);
+  left: clamp(0.15rem, 1.8vw, 1.9rem);
+  top: 50%;
+  display: grid;
+  justify-items: center;
+  gap: clamp(0.5rem, 1vw, 0.9rem);
+  transform: translateY(-50%);
+  color: var(--c-espresso);
+  pointer-events: none;
+  transition: color 480ms var(--ease-out);
+}
+
+/* celular: menor, para caber na margem sem encostar no texto */
+@media (max-width: 999px) {
+  /* centrada na margem lateral (a régua tem ~0,6rem de largura): a
+     375px sobra ~5px de cada lado; antes o número ficava a 3px do texto
+     e lia-se "06antes e depois" */
+  html[data-motion='on'] .trilho {
+    --trilho-fonte: 0.5rem;
+    left: max(0.15rem, calc((var(--gutter) - 0.6rem) / 2));
+  }
+
+  html[data-motion='on'] .trilho__num,
+  html[data-motion='on'] .trilho__nome {
+    font-size: var(--trilho-fonte);
+    letter-spacing: 0.14em;
+    /* sem isso a linha do nome vertical ocupa 13px de largura para uma
+       letra de 8px */
+    line-height: 1;
+  }
+
+  /* o número é o item mais largo: dígitos juntos, 7px */
+  html[data-motion='on'] .trilho__num {
+    font-size: 0.4375rem;
+    letter-spacing: 0.02em;
+  }
+
+  html[data-motion='on'] .trilho__linha {
+    height: 14vh;
+  }
+}
+
+html[data-tema-trilho='escuro'] .trilho {
+  color: var(--c-ivory);
+}
+
+.trilho__num {
+  font-size: 0.625rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+}
+
+.trilho__linha {
+  position: relative;
+  width: 1px;
+  height: 22vh;
+  background: color-mix(in srgb, currentColor 22%, transparent);
+  overflow: hidden;
+}
+
+.trilho__preenche {
+  position: absolute;
+  inset: 0;
+  background: currentColor;
+  transform: scaleY(0);
+  transform-origin: top;
+}
+
+.trilho__nome {
+  font-size: 0.5625rem;
+  font-weight: 600;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+  writing-mode: vertical-rl;
+  transform: rotate(180deg);
+}

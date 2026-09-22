@@ -1,0 +1,124 @@
+══════════════════════════════════════════════════════════════
+  COLOCAR A BIO DA JADE NO AR
+  Do jeito que está hoje até o link funcionando no Instagram
+══════════════════════════════════════════════════════════════
+
+Ideia geral, para tirar a dúvida de uma vez:
+
+  A bio é uma PASTA de arquivos no seu computador.
+  "Colocar no ar" = copiar essa pasta para um servidor.
+  O servidor devolve um ENDEREÇO (uma URL).
+  É esse endereço que entra na bio do Instagram.
+
+  Não existe "instalar" no Instagram. O Instagram só guarda
+  um endereço. Quem hospeda a página é o servidor.
+
+
+──────────────────────────────────────────────────────────────
+ETAPA 1 — HOSPEDAR  (2 minutos, grátis, sem cartão)
+──────────────────────────────────────────────────────────────
+
+1.1  Abra:  https://app.netlify.com/drop
+
+1.2  Abra o Explorador de Arquivos em:
+       C:\Users\MatheusYamauti\Desktop\Projetos\site-esteticaJade
+
+1.3  Arraste a pasta  bio  inteira para dentro da página do
+     Netlify.
+
+     IMPORTANTE: arraste a PASTA, não o index.html sozinho.
+     A foto está dentro de bio\assets\ e precisa ir junto.
+
+1.4  Espere alguns segundos. Ele mostra um endereço parecido
+     com:   https://tulip-crumble-a1b2c3.netlify.app
+
+1.5  Crie a conta quando ele pedir (e-mail ou GitHub). Sem
+     isso o site some depois de um tempo.
+
+1.6  Troque o nome do site para algo apresentável:
+       Site configuration > Site details > Change site name
+       sugestão:  jaderomero
+       vira:      https://jaderomero.netlify.app
+
+     Faça isso ANTES de mandar para ela — o endereço muda.
+
+
+──────────────────────────────────────────────────────────────
+ETAPA 2 — MANDAR PARA ELA APROVAR
+──────────────────────────────────────────────────────────────
+
+Mande no WhatsApp o endereço do passo 1.6. Ela abre no próprio
+celular, clica nos botões e sente como ficou de verdade —
+muito melhor do que olhar uma imagem.
+
+Se preferir mandar imagem antes, use:
+  entrega\bio-jade-romero-mockup.png
+
+Sugestão de mensagem:
+
+  "Jade, montei uma página pro link da sua bio do Instagram.
+   Dá uma olhada no celular: <endereço>
+   Os links são os mesmos que você já usa, só organizados.
+   Me diz o que achou e me passa seu horário de atendimento
+   e o endereço do studio pra eu completar."
+
+
+──────────────────────────────────────────────────────────────
+ETAPA 3 — O QUE PEDIR PARA ELA
+──────────────────────────────────────────────────────────────
+
+  [ ] Horário de atendimento
+  [ ] Endereço do studio
+  [ ] Número do WhatsApp com DDD
+      (o link de hoje é de QR code e não aceita mensagem
+       pronta; com o número, a conversa já abre escrita)
+  [ ] Se quer trocar alguma frase
+
+Com isso em mãos, me manda que eu atualizo a pasta. Aí é só
+repetir a Etapa 4.
+
+
+──────────────────────────────────────────────────────────────
+ETAPA 4 — ATUALIZAR DEPOIS  (sempre que mudar algo)
+──────────────────────────────────────────────────────────────
+
+4.1  Entre no site dentro do Netlify
+4.2  Aba  Deploys
+4.3  Arraste a pasta  bio  na área de arrastar
+
+O endereço continua o mesmo. Nada quebra para quem já
+salvou o link.
+
+
+──────────────────────────────────────────────────────────────
+ETAPA 5 — COLOCAR NO INSTAGRAM
+──────────────────────────────────────────────────────────────
+
+No aplicativo, no perfil DELA:
+
+5.1  Editar perfil
+5.2  Links
+5.3  Adicionar link externo
+       URL:     https://jaderomero.netlify.app
+       Título:  Agendamentos e conteúdos
+5.4  Salvar
+
+5.5  APAGUE os 4 links soltos que já estão lá.
+
+     Por quê: com vários links, o Instagram mostra uma lista
+     cinza antes de abrir qualquer coisa. Com um só, o toque
+     na bio abre direto a página dela. Mesmo número de toques,
+     mas com a cara dela em vez da do Instagram.
+
+
+──────────────────────────────────────────────────────────────
+DEPOIS, SE ELA QUISER (opcional)
+──────────────────────────────────────────────────────────────
+
+Domínio próprio, tipo  jaderomero.com.br  no lugar do
+.netlify.app. Custa em torno de R$ 40 por ano no registro.br
+e aponta para o mesmo site, sem refazer nada.
+
+Vale quando ela for imprimir cartão ou colocar em fachada.
+
+══════════════════════════════════════════════════════════════

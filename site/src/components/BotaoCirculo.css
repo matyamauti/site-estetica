@@ -1,0 +1,75 @@
+.circulo {
+  position: relative;
+  display: grid;
+  place-items: center;
+  width: clamp(6.5rem, 9vw, 8rem);
+  aspect-ratio: 1;
+  border-radius: 50%;
+  border: 1px solid color-mix(in srgb, currentColor 35%, transparent);
+  cursor: pointer;
+  touch-action: manipulation;
+  transition:
+    border-color var(--d-hover) var(--ease-out),
+    transform var(--d-press) var(--ease-out);
+}
+
+.circulo:active {
+  transform: scale(0.96);
+}
+
+.circulo__anel {
+  position: absolute;
+  inset: 10%;
+  width: 80%;
+  height: 80%;
+  overflow: visible;
+  animation: circulo-girar 18s linear infinite;
+}
+
+.circulo__anel text {
+  font-family: var(--font-text);
+  font-size: 7.2px;
+  font-weight: 600;
+  text-transform: uppercase;
+  fill: currentColor;
+}
+
+.circulo__seta {
+  font-size: 1.15rem;
+  line-height: 1;
+  transition: transform var(--d-ui) var(--ease-out);
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .circulo:hover {
+    border-color: currentColor;
+  }
+
+  .circulo:hover .circulo__seta {
+    transform: translate(2px, -2px);
+  }
+}
+
+/* Toque: o mesmo efeito do hover aparece enquanto o dedo está sobre
+   o elemento (no celular não existe hover). */
+@media (hover: none) {
+  .circulo:active {
+    border-color: currentColor;
+  }
+
+  .circulo:active .circulo__seta {
+    transform: translate(2px, -2px);
+  }
+}
+
+@keyframes circulo-girar {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .circulo__anel {
+    animation: none;
+  }
+}

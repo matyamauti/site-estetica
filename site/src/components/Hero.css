@@ -1,0 +1,542 @@
+/* =============================================================
+   HERO — palco preso na tela, conduzido pela rolagem.
+
+   Camadas, de trás para a frente:
+     moldura   cacau, com "Jade" gigante em script quase apagado
+     arco      janela que recorta a cena (clip-path controlado no JS)
+       cena    campo #E4C5B3 = o fundo exato da foto, com a Jade
+     marca     "JADE ROMERO" + script, sobre a moldura
+     deixa     rodapé da abertura
+     conteudo  a frase dela, que entra depois que o arco abre
+     cupula    a cúpula escura que sobe no fim e abre a foto do manifesto
+
+   Tudo que depende de movimento mora sob html[data-motion='on'].
+   Sem isso, o hero é a composição final numa tela só.
+   ============================================================= */
+
+.hero {
+  position: relative;
+  background: var(--c-hero-field);
+  color: var(--c-espresso);
+}
+
+.hero__palco {
+  position: relative;
+  height: 100svh;
+  min-height: 560px;
+  overflow: hidden;
+}
+
+/* ---- camadas ------------------------------------------------ */
+
+.hero__moldura,
+.hero__arco,
+.hero__abertura,
+.hero__cena {
+  position: absolute;
+  inset: 0;
+}
+
+.hero__moldura {
+  z-index: 0;
+  display: grid;
+  place-items: center;
+  background: var(--c-hero-moldura);
+  overflow: hidden;
+}
+
+/* "Jade" gigante ao fundo, quase apagado: a assinatura como textura,
+   como o "Estepona" atrás do logo da referência. */
+.hero__fundo-script {
+  font-family: var(--font-script);
+  font-size: clamp(14rem, 62vh, 44rem);
+  line-height: 1;
+  color: var(--c-ivory);
+  opacity: 0.06;
+  transform: translateY(6%) rotate(-8deg);
+  white-space: nowrap;
+  user-select: none;
+}
+
+.hero__arco {
+  z-index: 1;
+}
+
+.hero__cena {
+  background: var(--c-hero-field);
+}
+
+/* Na abertura a cena é deslocada para o rosto cair no centro do arco.
+   O campo nude se estende muito além da caixa para que esse
+   deslocamento nunca descubra a moldura cacau por trás — sem isso
+   aparecia uma faixa escura dentro da janela no meio da abertura. */
+.hero__cena::before {
+  content: '';
+  position: absolute;
+  inset: -60vmax;
+  z-index: -1;
+  background: var(--c-hero-field);
+}
+
+.hero__figure {
+  position: absolute;
+  background: transparent;
+}
+
+.hero__figure img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  object-position: bottom right;
+}
+
+/* ---- marca: JADE ROMERO + script --------------------------- */
+
+.hero__marca {
+  position: absolute;
+  z-index: 3;
+  left: 50%;
+  top: clamp(5.5rem, 17svh, 11rem);
+  display: flex;
+  align-items: center;
+  gap: clamp(1.25rem, 6vw, 7rem);
+  transform: translateX(-50%);
+  /* max-content: posicionada a partir do meio da tela, a caixa só
+     teria metade da largura e o "ROMERO" quebrava em "ROME / RO". */
+  width: max-content;
+  color: var(--c-ivory);
+  pointer-events: none;
+}
+
+.hero__nome {
+  position: relative;
+  display: grid;
+  justify-items: center;
+  font-weight: 400;
+  text-transform: uppercase;
+  letter-spacing: 0.01em;
+  line-height: 0.86;
+  text-wrap: initial;
+}
+
+.hero__nome-caixa {
+  display: grid;
+  justify-items: center;
+  white-space: nowrap;
+}
+
+.hero__nome-1 {
+  font-size: clamp(2.25rem, 4.6vw, 4.5rem);
+}
+
+.hero__nome-2 {
+  font-size: clamp(3.4rem, 8.6vw, 8.5rem);
+  letter-spacing: -0.01em;
+}
+
+/* O script atravessa o nome, levemente inclinado, como a palavra em
+   destaque dos posts dela. */
+.hero__nome-script {
+  position: absolute;
+  left: 50%;
+  bottom: -0.62em;
+  font-family: var(--font-script);
+  font-size: clamp(2.6rem, 5.4vw, 5.25rem);
+  line-height: 1;
+  text-transform: none;
+  letter-spacing: 0;
+  white-space: nowrap;
+  color: var(--c-ivory);
+  transform: translateX(-38%) rotate(-7deg);
+}
+
+.hero__lado {
+  font-family: var(--font-text);
+  font-size: var(--t-label);
+  font-weight: 500;
+  letter-spacing: 0.5em;
+  text-transform: uppercase;
+  color: var(--c-champagne);
+  white-space: nowrap;
+}
+
+/* ---- deixa: rodapé da abertura ------------------------------ */
+
+.hero__deixa {
+  position: absolute;
+  z-index: 3;
+  left: max(var(--gutter), calc((100% - var(--container)) / 2));
+  bottom: clamp(1.5rem, 4svh, 2.5rem);
+  display: grid;
+  gap: 2px;
+  font-size: 0.6875rem;
+  font-weight: 600;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--c-champagne);
+}
+
+.hero__deixa-linha {
+  width: 1px;
+  height: 3.5rem;
+  margin-bottom: var(--s-3);
+  background: currentColor;
+  transform-origin: top;
+}
+
+/* ---- conteúdo: a frase dela --------------------------------- */
+
+.hero__conteudo {
+  position: absolute;
+  z-index: 3;
+  left: max(var(--gutter), calc((100% - var(--container)) / 2));
+  right: var(--gutter);
+  top: 6.5rem;
+  display: grid;
+  justify-items: start;
+  color: var(--c-espresso);
+}
+
+.hero__titulo {
+  display: grid;
+  gap: clamp(0.35rem, 1vw, 0.8rem);
+  font-size: clamp(1.95rem, 1.2rem + 2.6vw, 2.5rem);
+  line-height: 1;
+  letter-spacing: -0.025em;
+  text-wrap: initial;
+}
+
+.hero__titulo-a {
+  max-width: 15ch;
+}
+
+.hero__titulo-b {
+  font-size: 0.72em;
+  line-height: 1.12;
+  letter-spacing: -0.015em;
+  max-width: 24ch;
+  color: var(--c-espresso-soft);
+}
+
+.hero__lead {
+  margin-top: var(--s-4);
+  max-width: 40ch;
+  font-size: var(--t-lead);
+  line-height: 1.5;
+  color: var(--c-espresso-soft);
+}
+
+.hero__acoes {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--s-4) var(--s-6);
+  margin-top: var(--s-4);
+}
+
+.hero__secundario {
+  color: var(--c-espresso);
+}
+
+/* ---- cúpula ------------------------------------------------- */
+
+.hero__cupula {
+  --cupula: calc(1.25 * hypot(100vw, 100svh));
+  position: absolute;
+  z-index: 4;
+  left: 50%;
+  top: 0;
+  width: var(--cupula);
+  height: var(--cupula);
+  margin-left: calc(var(--cupula) / -2);
+  border-radius: 50%;
+  /* mesma cor do estúdio da foto "Autocuidado": a cúpula abre a foto */
+  background: var(--c-foto-noite);
+  color: var(--c-champagne);
+  /* fora de cena até a coreografia trazê-la */
+  transform: translateY(110svh);
+}
+
+.hero__cupula-arco {
+  position: absolute;
+  inset: 0 0 auto 0;
+  width: 100%;
+  height: 50%;
+  overflow: visible;
+}
+
+.hero__cupula-arco text {
+  font-family: var(--font-display);
+  font-size: 15px;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  fill: currentColor;
+}
+
+.hero__cupula-monograma {
+  position: absolute;
+  left: 50%;
+  top: calc(var(--cupula) * 0.1);
+  font-family: var(--font-display);
+  font-size: clamp(1.5rem, 2.4vw, 2.25rem);
+  line-height: 1;
+  transform: translateX(-50%);
+}
+
+.hero__cupula-linha {
+  position: absolute;
+  left: 50%;
+  top: calc(var(--cupula) * 0.1 + 3rem);
+  width: 1px;
+  height: 4rem;
+  background: currentColor;
+  opacity: 0.4;
+}
+
+/* =============================================================
+   SEM MOVIMENTO: composição final numa tela só.
+   ============================================================= */
+
+html:not([data-motion='on']) .hero__moldura,
+html:not([data-motion='on']) .hero__deixa,
+html:not([data-motion='on']) .hero__cupula {
+  display: none;
+}
+
+/* A marca continua no documento (é o h1), mas sai da frente da foto
+   e vira uma linha discreta acima da frase. */
+html:not([data-motion='on']) .hero__marca {
+  left: max(var(--gutter), calc((100% - var(--container)) / 2));
+  top: 5.25rem;
+  transform: none;
+  color: var(--c-espresso-soft);
+  gap: var(--s-3);
+}
+
+html:not([data-motion='on']) .hero__nome {
+  display: block;
+  font-family: var(--font-text);
+  font-size: var(--t-label);
+  font-weight: 500;
+  letter-spacing: var(--ls-label);
+  line-height: 1.4;
+}
+
+html:not([data-motion='on']) .hero__nome-caixa,
+html:not([data-motion='on']) .hero__nome-1,
+html:not([data-motion='on']) .hero__nome-2 {
+  display: inline;
+  font-size: inherit;
+}
+
+html:not([data-motion='on']) .hero__nome-2::before {
+  content: ' ';
+}
+
+html:not([data-motion='on']) .hero__nome-script,
+html:not([data-motion='on']) .hero__lado {
+  display: none;
+}
+
+@media (max-width: 899px) {
+  html:not([data-motion='on']) .hero__conteudo {
+    top: 7.5rem;
+  }
+}
+
+/* No desktop estático a linha da marca brigaria com o selo do header,
+   que já mostra o nome. Ela continua no documento (é o h1), só sai da
+   tela — e o conteúdo fica no centro vertical, como na versão animada. */
+@media (min-width: 900px) {
+  html:not([data-motion='on']) .hero__marca {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+  }
+}
+
+/* =============================================================
+   COM MOVIMENTO: a seção ganha comprimento para a rolagem conduzir,
+   e o palco fica preso na tela.
+   ============================================================= */
+
+html[data-motion='on'] .hero {
+  height: 380svh;
+}
+
+html[data-motion='on'] .hero__palco {
+  position: sticky;
+  top: 0;
+}
+
+/* ---- celular: Jade embaixo, frase em cima ------------------- */
+
+@media (max-width: 899px) {
+  .hero__figure {
+    left: -6%;
+    right: -18%;
+    bottom: 0;
+    height: 62svh;
+  }
+
+  .hero__figure img {
+    object-position: bottom center;
+  }
+
+  /* Dos lados do nome não cabe (ROMERO já ocupa ~240px a 375): no
+     celular "Praia" sobe para cima do nome, à esquerda, e "Grande"
+     desce para baixo, à direita. Ao rolar, deslizam para fora pelos
+     lados, como no desktop (a animação é a mesma). */
+  .hero__marca {
+    flex-direction: column;
+    align-items: stretch;
+    gap: var(--s-2);
+  }
+
+  .hero__lado {
+    font-size: 0.625rem;
+    letter-spacing: 0.4em;
+  }
+
+  .hero__lado:first-child {
+    align-self: flex-start;
+  }
+
+  .hero__lado:last-child {
+    align-self: flex-end;
+  }
+
+  /* O arco ocupa o centro da base e a régua fica na margem esquerda:
+     a legenda corre na vertical pela margem DIREITA, ao lado do arco,
+     de cima para baixo, terminando no fio. */
+  .hero__deixa {
+    left: auto;
+    right: calc(var(--gutter) * 0.45);
+    bottom: clamp(1.5rem, 4svh, 2.5rem);
+    display: flex;
+    flex-direction: row-reverse;
+    align-items: center;
+    gap: var(--s-2);
+    font-size: 0.5625rem;
+    letter-spacing: 0.24em;
+    writing-mode: vertical-rl;
+  }
+
+  .hero__deixa-linha {
+    width: 1px;
+    height: 2.5rem;
+    margin: var(--s-2) 0 0;
+  }
+}
+
+/* Celular BAIXO (iPhone SE/8, 667px ou menos): com o parágrafo de
+   apoio, os botões desciam até a altura da mão levantada da Jade e ela
+   encostava no "Agendar horário" (medido: botões até 452px, mão a partir
+   de ~405px). O parágrafo repete o posicionamento — que já aparece na
+   legenda da abertura e no Sobre — então é ele que sai; frase e botões
+   ficam. */
+@media (max-width: 899px) and (max-height: 700px) {
+  .hero__lead {
+    display: none;
+  }
+}
+
+/* Muito baixo (≤600px, iPhone SE de 1ª geração): mesmo sem o parágrafo
+   a mão ainda tocava o link; a foto encolhe um pouco (62 → 56svh). */
+@media (max-width: 899px) and (max-height: 600px) {
+  .hero__figure {
+    height: 56svh;
+  }
+}
+
+/* ---- desktop ------------------------------------------------ */
+
+/* A altura da Jade na composição final vem de duas restrições
+   medidas no arquivo (1136×1385), como antes:
+     mão   a mão levantada começa a 7,57% da largura; com 4% de
+           sangria à direita, ela fica a 0,7253 × altura da borda
+     rosto o topo da cabeça está a 28,16% da altura; afunda pela base
+           até 12% se preciso para ficar livre do header */
+@media (min-width: 900px) {
+  .hero {
+    --borda: max(3rem, (100vw - var(--container)) / 2);
+    --tinta: 500px;
+    --respiro: 72px;
+    --topo-livre: 108px;
+    --hf-mao: calc((100vw - var(--borda) - var(--tinta) - var(--respiro)) / 0.7253);
+    --hf-rosto: calc((100svh - var(--topo-livre)) / 0.5984);
+    --hf: min(var(--hf-mao), var(--hf-rosto));
+  }
+
+  .hero__figure {
+    aspect-ratio: 1136 / 1385;
+    height: var(--hf);
+    right: calc(var(--hf) * -0.0328);
+    bottom: min(0px, calc(100svh - var(--topo-livre) - var(--hf) * 0.7184));
+  }
+
+  .hero__conteudo {
+    right: auto;
+    top: 50%;
+    width: min(56%, 660px);
+    transform: translateY(-50%);
+  }
+
+  .hero__titulo {
+    font-size: clamp(2.125rem, 0.85rem + 3.2vw, 4.25rem);
+  }
+
+  .hero__titulo-b {
+    font-size: 0.6em;
+    max-width: 22ch;
+  }
+
+  .hero__lead {
+    margin-top: var(--s-5);
+  }
+
+  .hero__acoes {
+    margin-top: var(--s-6);
+  }
+}
+
+@media (min-width: 900px) and (max-width: 1399px) {
+  .hero__lead {
+    max-width: 34ch;
+  }
+}
+
+@media (min-width: 900px) and (max-width: 1199px) {
+  .hero {
+    --tinta: 370px;
+    --respiro: 48px;
+  }
+
+  .hero__conteudo {
+    width: min(50%, 470px);
+  }
+
+  .hero__lead {
+    max-width: 28ch;
+  }
+
+  .hero__acoes {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: var(--s-4);
+  }
+}
+
+@media (min-width: 1600px) {
+  .hero {
+    --tinta: 540px;
+    --respiro: 60px;
+  }
+
+  .hero__conteudo {
+    width: min(56%, 740px);
+  }
+}

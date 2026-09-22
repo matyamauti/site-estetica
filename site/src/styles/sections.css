@@ -1,0 +1,775 @@
+/* =============================================================
+   SEÇÕES EDITORIAIS
+   Cada bloco aqui tem uma composição própria de propósito. O ritmo
+   da página vem dessa variação: capa → tipografia → retrato
+   sangrado → índice → faixa escura → comparação → faixa larga →
+   números → citação → grade → faixa escura → endereço.
+   ============================================================= */
+
+/* ---- MANIFESTO --------------------------------------------- */
+
+.manifesto {
+  --bg: var(--c-foto-noite);
+  background: var(--bg);
+  /* Sem respiro no topo: a cúpula do hero, da mesma cor, chega
+     colada e a foto parece nascer de dentro dela. */
+  padding-block: 0 clamp(3rem, 8vw, 6rem);
+}
+
+.manifesto__palco {
+  position: relative;
+  display: grid;
+  justify-items: center;
+}
+
+/* A foto no tamanho de uma tela, com as bordas dissolvidas no fundo
+   da seção (que é a cor do estúdio dela). A máscara fica na moldura,
+   não na imagem, para não andar junto com a cortina. */
+.manifesto__foto {
+  width: 100%;
+  aspect-ratio: 1086 / 1448;
+  background: var(--c-foto-noite);
+  -webkit-mask-image:
+    linear-gradient(to right, transparent 0%, #000 16%, #000 84%, transparent 100%),
+    linear-gradient(to bottom, transparent 0%, #000 9%, #000 74%, transparent 100%);
+  -webkit-mask-composite: source-in;
+  mask-image:
+    linear-gradient(to right, transparent 0%, #000 16%, #000 84%, transparent 100%),
+    linear-gradient(to bottom, transparent 0%, #000 9%, #000 74%, transparent 100%);
+  mask-composite: intersect;
+}
+
+.manifesto__foto img {
+  object-position: center top;
+}
+
+/* Assinatura: Jade Romero ── Estética e Beleza */
+.manifesto__rodape {
+  display: flex;
+  align-items: center;
+  gap: var(--s-3);
+  margin-top: var(--s-4);
+  font-family: var(--font-text);
+  font-size: var(--t-label);
+  font-weight: 500;
+  letter-spacing: var(--ls-label);
+  text-transform: uppercase;
+  color: var(--c-champagne);
+}
+
+.manifesto__rodape-fio {
+  width: clamp(2.5rem, 6vw, 5rem);
+  height: 1px;
+  background: currentColor;
+  opacity: 0.5;
+}
+
+@media (min-width: 900px) {
+  .manifesto {
+    padding-bottom: clamp(2rem, 4vw, 3.5rem);
+  }
+
+  /* Uma tela de altura, nunca maior que o arquivo (1448px). */
+  .manifesto__foto {
+    width: auto;
+    height: clamp(560px, 100svh, 1448px);
+  }
+
+  /* A assinatura desce para dentro da foto, sobre o fade da base. */
+  .manifesto__rodape {
+    position: absolute;
+    bottom: clamp(1rem, 4svh, 2.5rem);
+    margin: 0;
+  }
+}
+
+/* ---- SOBRE -------------------------------------------------- */
+
+.about__grid {
+  display: grid;
+  gap: var(--s-5);
+}
+
+.about__body {
+  display: grid;
+  gap: var(--s-4);
+  align-content: start;
+  padding-left: var(--gutter);
+}
+
+.about__title {
+  font-size: var(--t-h2);
+  max-width: 18ch;
+}
+
+.about__cargo {
+  margin-top: calc(var(--s-3) * -1);
+  font-family: var(--font-text);
+  font-size: var(--t-label);
+  font-weight: 500;
+  letter-spacing: var(--ls-label);
+  text-transform: uppercase;
+  color: var(--accent);
+}
+
+/* Retrato inteiro, sem parallax (o zoom dele cortava a cabeça). O
+   fundo da foto (#DDC2B0) é o nude da seção; as bordas se dissolvem
+   para não sobrar nenhuma linha de emenda. */
+.about__foto {
+  background: transparent;
+  -webkit-mask-image:
+    linear-gradient(to right, #000 88%, transparent),
+    linear-gradient(to bottom, transparent, #000 6%);
+  -webkit-mask-composite: source-in;
+  mask-image:
+    linear-gradient(to right, #000 88%, transparent),
+    linear-gradient(to bottom, transparent, #000 6%);
+  mask-composite: intersect;
+}
+
+.about__foto img {
+  object-fit: contain;
+}
+
+.about__prose {
+  color: var(--fg-soft);
+}
+
+.about__marker {
+  display: flex;
+  align-items: baseline;
+  gap: var(--s-3);
+  margin-top: var(--s-3);
+  padding-top: var(--s-4);
+  border-top: 1px solid var(--rule);
+}
+
+.about__marker-value {
+  font-family: var(--font-display);
+  font-size: clamp(2.5rem, 5vw, 3.5rem);
+  line-height: 1;
+  color: var(--accent);
+}
+
+@media (min-width: 900px) {
+  .about__grid {
+    grid-template-columns: minmax(0, 5fr) minmax(0, 7fr);
+    gap: clamp(2.5rem, 6vw, 5.5rem);
+    align-items: center;
+  }
+
+  .about__body {
+    padding-left: 0;
+  }
+}
+
+/* ---- DESTAQUE ----------------------------------------------- */
+
+.featured__grid {
+  display: grid;
+  gap: var(--s-6);
+}
+
+.featured__body {
+  display: grid;
+  gap: var(--s-4);
+  align-content: center;
+  justify-items: start;
+  padding-right: var(--gutter);
+}
+
+.featured__index {
+  font-family: var(--font-text);
+  font-size: var(--t-label);
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  color: var(--c-champagne);
+}
+
+.featured__title {
+  /* "Micropigmentação" tem 16 caracteres: no --t-h1 a palavra
+     estourava a coluna. A escala aqui é presa à largura da coluna,
+     e a hifenização entra como rede de segurança. */
+  font-size: clamp(2rem, 4.2vw, 3.25rem);
+  line-height: 1.02;
+  hyphens: auto;
+}
+
+.featured__text {
+  max-width: 38ch;
+  font-size: var(--t-lead);
+  line-height: 1.5;
+  color: var(--fg-soft);
+}
+
+@media (min-width: 900px) {
+  .featured__grid {
+    grid-template-columns: minmax(0, 6fr) minmax(0, 6fr);
+    gap: clamp(2.5rem, 6vw, 6rem);
+    align-items: center;
+  }
+
+  .featured__body {
+    padding-right: 0;
+  }
+}
+
+/* ---- EXPERIÊNCIA -------------------------------------------- */
+/* "Smooth Scroll Hero" do 21st.dev: palco preso na tela, a foto abre
+   de uma janela vertical até a tela cheia. Coreografia em motion.js
+   (montarExperiencia). Abaixo, o estado SEM movimento: palavra, foto
+   e frase empilhadas, sem nada escondido. */
+
+.experience__palco {
+  display: grid;
+  justify-items: center;
+  padding-inline: var(--gutter);
+}
+
+.experience__gigante {
+  font-family: var(--font-display);
+  /* "AUTOCUIDADO" tem 11 letras, ~7,6em de largura em Bodoni caixa
+     alta: 11,6vw cabe no container de 375 a 1440 */
+  font-size: clamp(2.3rem, 11.6vw, 10.5rem);
+  line-height: 0.9;
+  letter-spacing: -0.02em;
+  text-transform: uppercase;
+  white-space: nowrap;
+  text-align: center;
+  color: var(--c-clay);
+}
+
+.experience__janela {
+  position: relative;
+  width: min(100%, 32rem);
+  aspect-ratio: 1154 / 1351;
+  margin-top: var(--s-4);
+  overflow: hidden;
+  background: var(--c-ink);
+}
+
+.experience__foto {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.experience__veu {
+  display: none;
+}
+
+.experience__title {
+  justify-self: start;
+  width: 100%;
+  max-width: var(--container);
+  margin: clamp(2.5rem, 6vw, 4.5rem) auto 0;
+  font-size: var(--t-h2);
+}
+
+.experience__title span {
+  display: block;
+  max-width: 20ch;
+}
+
+/* ---- com movimento: o palco preso ---- */
+
+html[data-motion='on'] .experience {
+  padding-top: 0;
+}
+
+html[data-motion='on'] .experience__trilho {
+  position: relative;
+  height: 260svh;
+}
+
+html[data-motion='on'] .experience__palco {
+  position: sticky;
+  top: 0;
+  display: block;
+  height: 100svh;
+  overflow: hidden;
+  padding: 0;
+}
+
+/* a palavra fica no alto; a janela nasce logo abaixo dela */
+html[data-motion='on'] .experience__gigante {
+  position: absolute;
+  inset: 11svh 0 auto;
+}
+
+html[data-motion='on'] .experience__janela {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  width: auto;
+  aspect-ratio: auto;
+  margin: 0;
+  /* a cor do estúdio da foto: com ela inteira na tela, as sobras
+     laterais (ou em cima e embaixo, no celular) continuam o fundo */
+  background: var(--c-foto-estudio);
+  /* estado inicial antes do JS medir: fechada no centro */
+  clip-path: inset(40% 40% 40% 40%);
+}
+
+/* A foto aparece INTEIRA no fim (contain), nunca cortada. As bordas
+   se dissolvem no fundo de estúdio, então ela não vira um retângulo
+   colado. O zoom parte do rosto dela (58% × 38% da foto), convertido
+   para a posição dele na tela com a foto inteira. */
+html[data-motion='on'] .experience__foto {
+  /* largura da foto inteira na altura da tela, e onde ela começa:
+     deslocada para a direita (72%), a frase fica no escuro da esquerda */
+  --larg: calc(100vh * 1154 / 1351);
+  --ini: calc((100% - var(--larg)) * 0.72);
+  object-fit: contain;
+  object-position: 72% center;
+  transform-origin: calc(var(--ini) + var(--larg) * 0.58) 38%;
+  will-change: transform;
+  -webkit-mask-image: linear-gradient(
+    to right,
+    transparent var(--ini),
+    #000 calc(var(--ini) + 6vh),
+    #000 calc(var(--ini) + var(--larg) - 6vh),
+    transparent calc(var(--ini) + var(--larg))
+  );
+  mask-image: linear-gradient(
+    to right,
+    transparent var(--ini),
+    #000 calc(var(--ini) + 6vh),
+    #000 calc(var(--ini) + var(--larg) - 6vh),
+    transparent calc(var(--ini) + var(--larg))
+  );
+}
+
+/* No celular a foto ocupa a largura e sobra fundo em cima e embaixo:
+   o rosto fica mais alto na tela e as bordas que somem são essas. */
+@media (max-aspect-ratio: 1154 / 1351) {
+  html[data-motion='on'] .experience__foto {
+    object-position: center;
+    transform-origin: 58% 43%;
+    -webkit-mask-image:
+      linear-gradient(to bottom, transparent calc(50% - 50vw * 1351 / 1154), #000 calc(50% - 50vw * 1351 / 1154 + 5vw), #000 calc(50% + 50vw * 1351 / 1154 - 22vw), transparent calc(50% + 50vw * 1351 / 1154));
+    mask-image:
+      linear-gradient(to bottom, transparent calc(50% - 50vw * 1351 / 1154), #000 calc(50% - 50vw * 1351 / 1154 + 5vw), #000 calc(50% + 50vw * 1351 / 1154 - 22vw), transparent calc(50% + 50vw * 1351 / 1154));
+  }
+}
+
+/* Véu da leitura: escuro à esquerda, onde a frase fica, e na base. */
+html[data-motion='on'] .experience__veu {
+  display: block;
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(
+      to right,
+      color-mix(in srgb, var(--c-ink) 82%, transparent) 0%,
+      color-mix(in srgb, var(--c-ink) 55%, transparent) 34%,
+      transparent 66%
+    ),
+    linear-gradient(to top, color-mix(in srgb, var(--c-ink) 55%, transparent) 0%, transparent 45%);
+  opacity: 0;
+}
+
+html[data-motion='on'] .experience__title {
+  position: absolute;
+  z-index: 3;
+  left: max(var(--gutter), calc((100% - var(--container)) / 2));
+  bottom: clamp(3rem, 12svh, 8rem);
+  width: auto;
+  margin: 0;
+  color: var(--c-ivory);
+}
+
+html[data-motion='on'] .experience__title span {
+  max-width: 19ch;
+}
+
+/* "BELEZA": caixa alta como ela escreveu, na cor de apoio do escuro */
+.experience__destaque {
+  font-style: normal;
+  letter-spacing: 0.04em;
+  color: var(--accent);
+}
+
+html[data-motion='on'] .experience__destaque {
+  color: var(--c-champagne);
+}
+
+html[data-motion='on'] .experience .site-container {
+  padding-top: var(--section-y);
+}
+
+.experience__points {
+  display: grid;
+  gap: var(--s-5);
+  margin-top: clamp(2.5rem, 6vw, 4.5rem);
+}
+
+.experience__point {
+  padding-top: var(--s-4);
+  border-top: 1px solid var(--rule);
+  max-width: 40ch;
+}
+
+.experience__point-title {
+  margin-bottom: var(--s-2);
+  font-family: var(--font-text);
+  font-size: var(--t-body);
+  font-weight: 600;
+  letter-spacing: 0;
+}
+
+.experience__point p {
+  font-size: var(--t-small);
+  color: var(--fg-soft);
+}
+
+@media (min-width: 900px) {
+  .experience__points {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: var(--s-5);
+  }
+
+  /* Escadinha: as colunas pares descem um degrau. */
+  .experience__point:nth-child(even) {
+    margin-top: var(--s-6);
+  }
+}
+
+/* ---- NÚMEROS ------------------------------------------------ */
+
+.stats {
+  background: var(--c-linen);
+}
+
+.stats__row {
+  display: grid;
+  gap: var(--s-5);
+}
+
+.stats__item {
+  --fio-cor: var(--rule-strong); /* o fio dos números é o mais forte */
+  display: grid;
+  gap: var(--s-1);
+  padding-top: var(--s-4);
+  border-top: 1px solid var(--rule-strong);
+}
+
+.stats__value {
+  font-family: var(--font-display);
+  font-size: clamp(3rem, 8vw, 5.5rem);
+  line-height: 0.95;
+  letter-spacing: -0.03em;
+}
+
+@media (min-width: 760px) {
+  .stats__row {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: var(--s-6);
+  }
+}
+
+/* ---- AVALIAÇÕES --------------------------------------------- */
+
+.testimonials__head {
+  display: grid;
+  gap: var(--s-4);
+  margin-bottom: clamp(2.5rem, 6vw, 4.5rem);
+}
+
+.testimonials__title {
+  font-size: var(--t-h2);
+  max-width: 16ch;
+}
+
+.testimonials__rating {
+  display: flex;
+  align-items: baseline;
+  gap: var(--s-3);
+}
+
+.testimonials__score {
+  font-family: var(--font-display);
+  font-size: clamp(2rem, 4vw, 2.75rem);
+  line-height: 1;
+  color: var(--accent);
+}
+
+.testimonials__grid {
+  display: grid;
+  gap: clamp(2.5rem, 6vw, 4rem);
+}
+
+.quote {
+  max-width: 46ch;
+}
+
+.quote__text {
+  margin: 0;
+  font-family: var(--font-display);
+  font-size: clamp(1.25rem, 2.2vw, 1.75rem);
+  line-height: 1.4;
+  letter-spacing: -0.01em;
+}
+
+.quote__author {
+  margin-top: var(--s-4);
+  padding-top: var(--s-3);
+  border-top: 1px solid var(--rule);
+  font-size: var(--t-label);
+  font-weight: 600;
+  letter-spacing: var(--ls-label);
+  text-transform: uppercase;
+  color: var(--fg-soft);
+}
+
+@media (min-width: 900px) {
+  .testimonials__head {
+    grid-template-columns: minmax(0, 1fr) auto;
+    align-items: end;
+    gap: var(--s-6);
+  }
+
+  .testimonials__grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .testimonials__grid > :nth-child(even) {
+    margin-top: var(--s-7);
+  }
+}
+
+/* ---- CTA ---------------------------------------------------- */
+
+.cta {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  padding-block: clamp(6rem, 14vw, 12rem);
+  text-align: center;
+}
+
+/* Vídeo de fundo + véu. O véu é o que garante a leitura: escuro o
+   bastante no centro, onde fica o texto, e mais leve nas bordas para
+   o vídeo aparecer. */
+.cta__fundo {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background: var(--c-ink);
+}
+
+.cta__video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center 45%;
+  pointer-events: none;
+}
+
+.cta__fundo::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(ellipse 70% 60% at 50% 50%, color-mix(in srgb, var(--c-ink) 38%, transparent), transparent 75%),
+    color-mix(in srgb, var(--c-ink) var(--cta-veu, 58%), transparent);
+}
+
+.cta__inner {
+  display: grid;
+  justify-items: center;
+  gap: var(--s-6);
+}
+
+.cta__title {
+  font-size: var(--t-h1);
+  line-height: 1.02;
+}
+
+.cta__actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: var(--s-4) var(--s-5);
+}
+
+.cta__phone {
+  position: relative;
+  font-size: var(--t-label);
+  font-weight: 500;
+  letter-spacing: var(--ls-label);
+  text-transform: uppercase;
+  /* marfim, não champanhe: sobre os quadros claros do vídeo o champanhe
+     caía para 2,8:1; em marfim o pior quadro fica acima de 4,5:1
+     (medido com ferramentas/contraste.py em 22/09/2026) */
+  color: var(--c-ivory);
+  cursor: pointer;
+}
+
+/* Mesmo recurso do .link-rule: alvo confortável sem inchar o texto. */
+.cta__phone::before {
+  content: '';
+  position: absolute;
+  inset: -13px -8px;
+}
+
+/* ---- LOCALIZAÇÃO -------------------------------------------- */
+
+.location__grid {
+  display: grid;
+  gap: clamp(2.5rem, 6vw, 4rem);
+}
+
+.location__info {
+  display: grid;
+  gap: var(--s-4);
+  align-content: start;
+}
+
+.location__title {
+  font-size: var(--t-h2);
+  max-width: 14ch;
+}
+
+.location__address {
+  display: grid;
+  gap: 2px;
+  font-style: normal;
+  font-size: var(--t-body);
+  color: var(--fg-soft);
+}
+
+.location__phone {
+  margin-top: var(--s-2);
+  color: var(--fg);
+  cursor: pointer;
+  text-decoration: underline;
+  text-underline-offset: 4px;
+  text-decoration-color: var(--rule-strong);
+  transition: text-decoration-color var(--d-hover) var(--ease-out);
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .location__phone:hover {
+    text-decoration-color: var(--accent);
+  }
+}
+
+/* Toque: o mesmo efeito do hover aparece enquanto o dedo está sobre
+   o elemento (no celular não existe hover). */
+@media (hover: none) {
+  .location__phone:active {
+    text-decoration-color: var(--accent);
+  }
+}
+
+.location__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--s-3);
+  margin-top: var(--s-3);
+}
+
+/* Mapa do Google em tom quente: sem saturação, um pouco de sépia —
+   fica na família nude do site. O alfinete vermelho vira terracota. */
+.location__map {
+  position: relative;
+  aspect-ratio: 4 / 3;
+  background: var(--c-linen);
+  border: 1px solid var(--rule);
+  overflow: hidden;
+}
+
+.location__map-frame {
+  display: block;
+  width: 100%;
+  height: 100%;
+  border: 0;
+  filter: grayscale(1) sepia(0.28) contrast(0.96) brightness(1.02);
+}
+
+@media (max-width: 599px) {
+  .location__map {
+    aspect-ratio: 1 / 1;
+  }
+}
+
+@media (min-width: 900px) {
+  .location__grid {
+    grid-template-columns: minmax(0, 5fr) minmax(0, 7fr);
+    align-items: center;
+  }
+}
+
+/* ---- FOOTER ------------------------------------------------- */
+
+.footer {
+  background: var(--c-ink);
+  color: var(--c-ivory);
+  padding-block: clamp(3rem, 7vw, 5rem) var(--s-5);
+}
+
+.footer__inner {
+  display: grid;
+  gap: var(--s-6);
+  padding-bottom: var(--s-6);
+}
+
+.footer__name {
+  font-family: var(--font-display);
+  font-size: 1.5rem;
+  line-height: 1.1;
+}
+
+.footer__city {
+  margin-top: var(--s-2);
+  font-size: var(--t-small);
+  color: var(--c-champagne);
+}
+
+.footer__nav,
+.footer__contact {
+  display: grid;
+  gap: var(--s-2);
+  align-content: start;
+  font-size: var(--t-small);
+}
+
+.footer__nav a,
+.footer__contact a {
+  justify-self: start;
+  cursor: pointer;
+  border-bottom: 1px solid transparent;
+  transition: border-color var(--d-hover) var(--ease-out);
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .footer__nav a:hover,
+  .footer__contact a:hover {
+    border-bottom-color: currentColor;
+  }
+}
+
+/* Toque: o mesmo efeito do hover aparece enquanto o dedo está sobre
+   o elemento (no celular não existe hover). */
+@media (hover: none) {
+  .footer__nav a:active,
+  .footer__contact a:active {
+    border-bottom-color: currentColor;
+  }
+}
+
+.footer__legal {
+  padding-top: var(--s-4);
+  border-top: 1px solid var(--rule-dark);
+  font-size: var(--t-small);
+  color: color-mix(in srgb, var(--c-champagne) 80%, transparent);
+}
+
+@media (min-width: 760px) {
+  .footer__inner {
+    grid-template-columns: minmax(0, 2fr) minmax(0, 1fr) minmax(0, 1fr);
+    gap: var(--s-5);
+  }
+}

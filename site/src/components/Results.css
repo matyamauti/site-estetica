@@ -1,0 +1,255 @@
+/* =============================================================
+   RESULTADOS — casos lado a lado, cada um um comparador antes/depois.
+   Desktop: título em cima, dois cards do mesmo tamanho, alinhados
+   pelo topo (pedido do Matheus em 21/09/2026).
+   Celular: um card embaixo do outro.
+   ============================================================= */
+
+/* título, cards e aviso compartilham as mesmas bordas: a largura
+   dos dois cards somada ao vão entre eles */
+.results__bloco {
+  --card: 27rem;
+  --vao: clamp(2rem, 6vw, 6rem);
+}
+
+@media (min-width: 800px) {
+  .results__bloco > * {
+    width: min(100%, calc(var(--card) * 2 + var(--vao)));
+    max-width: none;
+    margin-inline: auto;
+  }
+
+  .results__instrucao {
+    text-align: right;
+  }
+}
+
+.results__head {
+  display: grid;
+  gap: var(--s-3);
+  margin-bottom: clamp(2rem, 5vw, 3.5rem);
+}
+
+.results__title {
+  font-size: var(--t-h2);
+}
+
+.results__instrucao {
+  max-width: 30ch;
+  font-size: var(--t-small);
+  color: var(--fg-soft);
+}
+
+.results__casos {
+  display: grid;
+  gap: clamp(2.5rem, 6vw, 3.5rem);
+}
+
+@media (min-width: 800px) {
+  .results__head {
+    grid-template-columns: minmax(0, 1fr) auto;
+    align-items: end;
+    column-gap: var(--s-6);
+  }
+
+  .results__casos {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    align-items: start;
+    column-gap: var(--vao);
+  }
+
+}
+
+.results__disclaimer {
+  margin-top: clamp(2.5rem, 5vw, 3.5rem);
+  padding-top: var(--s-4);
+  font-size: var(--t-small);
+  color: var(--fg-soft);
+}
+
+/* ---- comparador ---------------------------------------------- */
+
+.compare {
+  width: 100%;
+  max-width: 27rem;
+  margin: 0 auto;
+}
+
+@media (min-width: 800px) {
+  .compare {
+    max-width: none;
+  }
+}
+
+.compare__legenda {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: var(--s-1) var(--s-3);
+  margin-top: var(--s-3);
+}
+
+.compare__descricao {
+  flex-basis: 100%;
+  max-width: 44ch;
+  margin-top: var(--s-1);
+  font-size: var(--t-small);
+  line-height: 1.55;
+  color: var(--fg-soft);
+}
+
+.compare__nota {
+  font-family: var(--font-display);
+  font-size: clamp(1.05rem, 1.5vw, 1.25rem);
+  line-height: 1.25;
+}
+
+/* caso ainda sem fotos */
+.compare__frame.is-pendente {
+  display: grid;
+  place-items: center;
+  cursor: default;
+  border: 1px dashed var(--rule-strong);
+  background: var(--c-linen);
+}
+
+.compare__pendente {
+  display: grid;
+  gap: var(--s-1);
+  text-align: center;
+  color: var(--fg-soft);
+  font-size: var(--t-small);
+}
+
+.compare__pendente b {
+  font-family: var(--font-text);
+  font-size: var(--t-label);
+  font-weight: 600;
+  letter-spacing: var(--ls-label);
+  text-transform: uppercase;
+  color: var(--fg);
+}
+
+.compare__frame {
+  --pos: 50%;
+  position: relative;
+  aspect-ratio: 1080 / 1296;
+  overflow: hidden;
+  isolation: isolate;
+  background: var(--c-linen);
+  cursor: ew-resize;
+  user-select: none;
+  -webkit-user-select: none;
+  /* rolar a página na vertical continua livre; o gesto horizontal
+     é do comparador */
+  touch-action: pan-y;
+}
+
+.compare__img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  pointer-events: none;
+}
+
+/* DEPOIS fica por cima, recortado a partir da linha para a direita */
+.compare__img--depois {
+  clip-path: inset(0 0 0 var(--pos));
+}
+
+/* rótulos nos cantos de baixo (em cima, o ANTES cobriria o texto que
+   a Jade gravou na foto); cada um some quando o seu lado fica estreito
+   demais para ele */
+.compare__tag {
+  position: absolute;
+  top: var(--s-2);
+  z-index: 2;
+  padding: 0.45em 0.9em;
+  font-family: var(--font-text);
+  font-size: var(--t-label);
+  font-weight: 500;
+  letter-spacing: var(--ls-label);
+  text-transform: uppercase;
+  color: var(--c-ivory);
+  background: color-mix(in srgb, var(--c-ink) 42%, transparent);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  pointer-events: none;
+  transition: opacity 0.3s var(--ease-out);
+}
+
+.compare__tag--antes {
+  left: var(--s-2);
+  top: auto;
+  bottom: var(--s-2);
+  opacity: clamp(0, (var(--pos-n) - 18) / 8, 1);
+}
+
+.compare__tag--depois {
+  right: var(--s-2);
+  top: auto;
+  bottom: var(--s-2);
+  opacity: clamp(0, (82 - var(--pos-n)) / 8, 1);
+}
+
+.compare__linha {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: var(--pos);
+  z-index: 3;
+  width: 1px;
+  background: var(--c-ivory);
+  box-shadow: 0 0 12px rgba(23, 20, 17, 0.35);
+  transform: translateX(-0.5px);
+  pointer-events: none;
+}
+
+.compare__alca {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  display: grid;
+  place-items: center;
+  width: 3rem;
+  height: 3rem;
+  border: 1px solid var(--c-ivory);
+  border-radius: 50%;
+  color: var(--c-ivory);
+  background: color-mix(in srgb, var(--c-ink) 30%, transparent);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  transform: translate(-50%, -50%);
+  transition:
+    transform 0.25s var(--ease-out),
+    background-color 0.25s var(--ease-out);
+}
+
+.compare__frame.is-arrastando .compare__alca {
+  transform: translate(-50%, -50%) scale(1.12);
+  background: color-mix(in srgb, var(--c-ink) 50%, transparent);
+}
+
+@media (hover: hover) {
+  .compare__frame:hover .compare__alca {
+    background: color-mix(in srgb, var(--c-ink) 45%, transparent);
+  }
+}
+
+/* range: só teclado e leitor de tela. O ponteiro é da moldura. */
+.compare__range {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.compare__frame:has(.compare__range:focus-visible) {
+  outline: 2px solid var(--accent);
+  outline-offset: 4px;
+}

@@ -1,0 +1,14 @@
+node_modules/
+dist/
+.DS_Store
+*.local
+site/ferramentas/saida/
+
+.vercel
+.env*
+
+# originais das fotos (inclui fotos de clientes do antes/depois) — nunca no git
+site/originais/
+
+# configurações locais do Claude Code
+.claude/settings.local.json

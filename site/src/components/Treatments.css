@@ -1,0 +1,210 @@
+/* =============================================================
+   TRATAMENTOS — formato do "Real-Life Location" da referência.
+   Tudo centralizado: rótulo, nome gigante, foto pequena, numeração,
+   nota. Os itens de cada slide ficam empilhados na mesma célula.
+   ============================================================= */
+
+.treatments__inner {
+  display: grid;
+  justify-items: center;
+  text-align: center;
+}
+
+.treatments__rotulo {
+  margin-bottom: clamp(1.5rem, 4vw, 2.5rem);
+  font-family: var(--font-text);
+}
+
+.treatments__carrossel {
+  display: grid;
+  justify-items: center;
+  width: 100%;
+  outline: none;
+}
+
+.treatments__carrossel:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 8px;
+}
+
+/* nome gigante: a palavra mais longa ("Micropigmentação", 16 letras)
+   precisa caber na largura do container em qualquer tela */
+.treatments__nomes {
+  display: grid;
+  width: 100%;
+}
+
+.treatments__nome {
+  grid-area: 1 / 1;
+  font-family: var(--font-display);
+  /* Medido: "MICROPIGMENTAÇÃO" ocupa 10,73em. O container útil é
+     335px a 375 e 1224px a 1440 — 7,6vw cabe nos dois com folga.
+     Com o mínimo antigo (2,3rem) a palavra vazava 40px no celular. */
+  font-size: clamp(1.4rem, 7.6vw, 7.5rem);
+  line-height: 0.95;
+  letter-spacing: -0.015em;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+/* foto ao centro, sobrepondo levemente a base do nome. Vertical
+   (4:5): três das quatro fotos são retratos, e no 4:3 o corte
+   levava rostos e os textos que ela gravou nelas. */
+.treatments__palco {
+  position: relative;
+  width: clamp(13.5rem, 21vw, 19rem);
+  aspect-ratio: 4 / 5;
+  margin-top: var(--s-3);
+  overflow: hidden;
+}
+
+/* No desktop a foto encosta e sobe um pouco sobre a base do nome.
+   No celular o nome é pequeno: sobrepor escondia metade dele. */
+@media (min-width: 700px) {
+  .treatments__palco {
+    margin-top: clamp(-1.6rem, -1.8vw, -0.8rem);
+  }
+}
+
+.treatments__foto {
+  position: absolute;
+  inset: 0;
+}
+
+.treatments__foto .figure {
+  height: 100%;
+}
+
+/* linha de tempo da troca automática, colada na base da foto */
+.treatments__tempo {
+  display: block;
+  width: clamp(13.5rem, 21vw, 19rem);
+  height: 1px;
+  background: var(--rule);
+  overflow: hidden;
+}
+
+.treatments__tempo-fill {
+  display: block;
+  height: 100%;
+  background: var(--fg);
+  transform-origin: left;
+  transform: scaleX(0);
+  animation: jr-tempo linear forwards;
+}
+
+.treatments__tempo[data-girando='false'] .treatments__tempo-fill {
+  animation-play-state: paused;
+}
+
+@keyframes jr-tempo {
+  to {
+    transform: scaleX(1);
+  }
+}
+
+html:not([data-motion='on']) .treatments__tempo {
+  display: none;
+}
+
+/* pausar / retomar */
+.treatments__pausa {
+  display: grid;
+  place-items: center;
+  width: 44px;
+  height: 44px;
+  margin-left: calc(var(--s-3) * -0.5);
+  color: var(--fg-soft);
+  cursor: pointer;
+  touch-action: manipulation;
+  transition:
+    color var(--d-hover) var(--ease-out),
+    transform var(--d-press) var(--ease-out);
+}
+
+.treatments__pausa:active {
+  transform: scale(0.92);
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .treatments__pausa:hover {
+    color: var(--fg);
+  }
+}
+
+/* Toque: o mesmo efeito do hover aparece enquanto o dedo está sobre
+   o elemento (no celular não existe hover). */
+@media (hover: none) {
+  .treatments__pausa:active {
+    color: var(--fg);
+  }
+}
+
+/* numeração: ‹ 01 ──── 04 › */
+.treatments__controles {
+  display: flex;
+  align-items: center;
+  /* proporcional: a 320px, com o botão de pausa, o espaço fixo de
+     1rem estourava a largura da tela em 7px */
+  gap: clamp(0.4rem, 2.6vw, 1rem);
+  margin-top: var(--s-4);
+}
+
+.treatments__seta {
+  display: grid;
+  place-items: center;
+  width: 44px;
+  height: 44px;
+  font-family: var(--font-display);
+  font-size: 1.6rem;
+  line-height: 1;
+  cursor: pointer;
+  touch-action: manipulation;
+  transition: transform var(--d-press) var(--ease-out);
+}
+
+.treatments__seta:active {
+  transform: scale(0.92);
+}
+
+.treatments__num {
+  font-size: var(--t-label);
+  font-weight: 600;
+  letter-spacing: 0.12em;
+}
+
+.treatments__barra {
+  position: relative;
+  width: clamp(2.5rem, 9vw, 7rem);
+  height: 1px;
+  background: var(--rule);
+  overflow: hidden;
+}
+
+.treatments__barra-fill {
+  position: absolute;
+  inset: 0;
+  background: var(--fg);
+  transform-origin: left;
+  transition: transform 1.2s var(--ease-out);
+}
+
+.treatments__notas {
+  display: grid;
+  margin-top: var(--s-4);
+  max-width: 42ch;
+}
+
+.treatments__nota {
+  grid-area: 1 / 1;
+  display: grid;
+  gap: var(--s-2);
+}
+
+.treatments__nota-nome {
+  font-family: var(--font-text);
+}
+
+.treatments__nota-texto {
+  color: var(--fg-soft);
+}

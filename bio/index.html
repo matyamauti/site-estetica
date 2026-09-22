@@ -1,0 +1,503 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+
+<!-- ═══════════════════════════════════════════════════════════
+     [EDITAR] = dado que ainda falta confirmar com ela
+     ═══════════════════════════════════════════════════════════ -->
+
+<title>Jade Romero — Estética e Beleza</title>
+<meta name="description" content="Agendamento, grupo VIP e conteúdos de Jade Romero, estética e beleza.">
+<meta name="theme-color" content="#0A0908">
+<meta name="format-detection" content="telephone=no">
+
+<meta property="og:type" content="website">
+<meta property="og:title" content="Jade Romero — Estética e Beleza">
+<meta property="og:description" content="Autocuidado não deveria acontecer só quando você está exausta.">
+<meta property="og:url" content="https://jaderomero-estetica.netlify.app/">
+<meta property="og:image" content="https://jaderomero-estetica.netlify.app/assets/og.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:locale" content="pt_BR">
+<meta name="twitter:card" content="summary_large_image">
+
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='24' fill='%230A0908'/%3E%3Ctext x='50' y='70' font-size='56' font-family='Georgia,serif' fill='%23B08D5E' text-anchor='middle'%3EJ%3C/text%3E%3C/svg%3E">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600&display=swap">
+
+<style>
+/* ── TOKENS — extraídos da identidade real dela ─────────────── */
+:root{
+  --bg:#0A0908;          /* igual ao fundo real da foto (#090909) */
+  --bg-deep:#050404;
+  --card:#131212;        /* carvao neutro — sem vies rosado */
+  --line:#262523;
+  --ico-bg:#1D1C1A;
+
+  --ink:#EDE9E4;         /* 15:1 sobre --card */
+  --ink-soft:#99948E;    /* 6.3:1 sobre --card */
+  --chev:#645F5A;
+
+  --champagne:#B08D5E;   /* ouro velho da joia — 6.3:1 com o espresso */
+  --on-champagne:#120E0C;
+  --gold:#B08D5E;
+  --gold-dim:#8F7550;    /* icones secundarios — 3.6:1, recuados */
+
+  --r-md:16px;
+  --ease:cubic-bezier(.23,1,.32,1);
+}
+
+*{box-sizing:border-box;margin:0;padding:0}
+html{
+  -webkit-text-size-adjust:100%;
+  background:var(--bg);
+}
+
+body{
+  min-height:100vh;
+  min-height:100dvh;
+  font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
+  font-size:16px;
+  line-height:1.5;
+  color:var(--ink);
+  background:var(--bg);
+  display:flex;
+  justify-content:center;
+  overflow-x:hidden;
+  -webkit-font-smoothing:antialiased;
+}
+
+/* Grão fino — o detalhe que faz parecer impresso, não renderizado */
+body::before{
+  content:"";
+  position:fixed; inset:0;
+  pointer-events:none; z-index:3;
+  opacity:.04;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.8' numOctaves='3'/%3E%3C/filter%3E%3Crect width='160' height='160' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+.wrap{
+  position:relative;
+  width:100%;
+  max-width:440px;
+  min-height:100dvh;
+  display:flex;
+  flex-direction:column;
+  background:var(--bg);
+}
+
+/* ── HERÓI ──────────────────────────────────────────────────── */
+.hero{
+  position:relative;
+  width:100%;
+  aspect-ratio:1125/672;
+  overflow:hidden;
+}
+.hero img{
+  width:100%; height:100%;
+  object-fit:cover;
+  object-position:50% 34%;
+  display:block;
+}
+.hero::after{                          /* dissolve a foto no fundo */
+  content:"";
+  position:absolute; inset:0;
+  background:linear-gradient(180deg,
+    rgba(10,9,8,0) 38%,
+    rgba(10,9,8,.45) 68%,
+    rgba(10,9,8,.88) 88%,
+    var(--bg) 100%);
+}
+
+.inner{padding:0 22px}
+
+/* ── IDENTIDADE ─────────────────────────────────────────────── */
+header{
+  text-align:center;
+  margin-top:-26px;                    /* sobe sobre a barra do degradê */
+  position:relative; z-index:2;
+  margin-bottom:18px;
+}
+
+h1{
+  font-family:"Fraunces",Georgia,serif;
+  font-weight:600;
+  font-size:38px;
+  line-height:1.05;
+  letter-spacing:-.015em;
+  color:var(--ink);
+}
+
+.role{
+  margin-top:11px;
+  font-size:11px;
+  letter-spacing:.24em;                /* a assinatura da própria marca dela */
+  text-transform:uppercase;
+  color:var(--gold);
+  font-weight:600;
+}
+
+.quote{
+  margin:12px auto 0;
+  max-width:29ch;
+  font-family:"Fraunces",Georgia,serif;
+  font-weight:400;
+  font-style:italic;
+  font-size:16px;
+  line-height:1.55;
+  color:var(--ink-soft);
+}
+
+/* ── LINKS ──────────────────────────────────────────────────── */
+.links{display:flex; flex-direction:column; gap:8px}
+
+.link{
+  display:flex;
+  align-items:center;
+  gap:14px;
+  min-height:64px;
+  padding:12px 14px;
+  border-radius:var(--r-md);
+  background:var(--card);
+  border:1px solid var(--line);
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.035);
+  text-decoration:none;
+  color:var(--ink);
+  cursor:pointer;
+  -webkit-tap-highlight-color:transparent;
+  touch-action:manipulation;
+  transition:transform 160ms var(--ease), border-color 220ms var(--ease), background 220ms var(--ease);
+}
+
+.link--primary{
+  background:var(--champagne);
+  box-shadow:none;
+  border-color:transparent;
+  color:var(--on-champagne);
+  min-height:72px;
+}
+
+.ico{
+  flex:0 0 auto;
+  width:40px; height:40px;
+  border-radius:11px;
+  display:grid; place-items:center;
+  background:var(--ico-bg);
+  color:var(--gold-dim);
+}
+.link--primary .ico{background:rgba(18,14,12,.13); color:var(--on-champagne)}
+.ico svg{width:21px; height:21px; stroke-width:1.75}
+
+.txt{flex:1 1 auto; min-width:0}
+.txt b{
+  display:block;
+  font-size:14px;
+  font-weight:600;
+  letter-spacing:.085em;
+  text-transform:uppercase;
+}
+.txt small{
+  display:block; margin-top:2px;
+  font-size:13px; line-height:1.4;
+  color:var(--ink-soft);
+  overflow-wrap:anywhere;
+}
+.link--primary .txt small{color:rgba(18,14,12,.72)}
+
+.chev{flex:0 0 auto; width:18px; height:18px; color:var(--chev); stroke-width:2}
+.link--primary .chev{color:rgba(18,14,12,.5)}
+
+.link:active{transform:scale(.97)}
+
+@media (hover:hover) and (pointer:fine){
+  .link:hover{background:#1A1918; border-color:#343230}
+  .link--primary:hover{background:#C09A68; border-color:transparent}
+}
+
+.link:focus-visible{outline:2px solid var(--champagne); outline-offset:3px}
+.link--primary:focus-visible{outline-color:var(--ink)}
+
+/* ── RODAPÉ ─────────────────────────────────────────────────── */
+footer{
+  margin-top:auto;
+  padding:16px 22px max(20px, env(safe-area-inset-bottom));
+  text-align:center;
+  font-size:12.5px;
+  line-height:1.75;
+  color:var(--ink-soft);
+}
+footer .rule{
+  width:30px; height:1px;
+  margin:0 auto 14px;
+  background:var(--gold);
+  opacity:.65;
+}
+
+/* ── ENTRADA ────────────────────────────────────────────────── */
+@keyframes rise{from{opacity:0; transform:translateY(10px)} to{opacity:1; transform:none}}
+@keyframes fadeIn{from{opacity:0} to{opacity:1}}
+
+.hero{opacity:0; animation:fadeIn .7s var(--ease) forwards}
+.reveal{opacity:0; animation:rise .45s var(--ease) forwards}
+header.reveal{animation-delay:.12s}
+.links .link:nth-child(1){animation-delay:.20s}
+.links .link:nth-child(2){animation-delay:.25s}
+.links .link:nth-child(3){animation-delay:.30s}
+.links .link:nth-child(4){animation-delay:.35s}
+.links .link:nth-child(5){animation-delay:.40s}
+footer.reveal{animation-delay:.42s}
+
+@media (prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation-duration:.01ms !important; animation-iteration-count:1 !important; transition-duration:.01ms !important}
+  .reveal,.hero{opacity:1; transform:none}
+}
+
+/* Telas baixas (navegador do Instagram em celular pequeno):
+   encolhe o herói e a frase para caber mais link sem rolar.
+   Celular grande não é afetado. */
+@media (max-height:740px){
+  .hero{aspect-ratio:1125/545}
+  .quote{font-size:15px; margin-top:10px}
+  h1{font-size:34px}
+  header{margin-top:-22px; margin-bottom:14px}
+}
+
+@media (max-width:360px){
+  h1{font-size:33px}
+  .quote{font-size:15px}
+  .link{min-height:58px; padding:10px 12px; gap:11px}
+  .ico{width:36px; height:36px}
+}
+</style>
+</head>
+
+<body>
+<main class="wrap">
+
+  <div class="hero">
+    <img src="assets/hero.webp" alt="Jade Romero, esteticista" fetchpriority="high" width="1125" height="716">
+  </div>
+
+  <div class="inner">
+
+    <header class="reveal">
+      <h1>Jade Romero</h1>
+      <p class="role">Estética e Beleza</p>
+      <p class="quote">“Autocuidado não deveria acontecer só quando você está exausta.”</p>
+    </header>
+
+    <!-- URLs exatamente como estão na bio do Instagram hoje -->
+    <nav class="links" aria-label="Links principais">
+
+      <a class="link link--primary reveal" href="https://jaderomero.vercel.app/" rel="noopener">
+        <span class="ico" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="12" r="10"/><path d="M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20"/><path d="M2 12h20"/>
+          </svg>
+        </span>
+        <span class="txt">
+          <b>Meu site</b>
+          <small>Tratamentos e agendamento</small>
+        </span>
+        <svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9 18 6-6-6-6"/></svg>
+      </a>
+
+      <a class="link reveal" href="https://chat.whatsapp.com/KytgKe5O1GQL4wXiCk884m?s=cl&amp;p=i&amp;mlu=4&amp;ilr=4" rel="noopener">
+        <span class="ico" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/>
+          </svg>
+        </span>
+        <span class="txt">
+          <b>Grupo VIP</b>
+          <small>Novidades em primeira mão</small>
+        </span>
+        <svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9 18 6-6-6-6"/></svg>
+      </a>
+
+      <a class="link reveal" href="https://pay.kiwify.com.br/fz5cJfd" rel="noopener">
+        <span class="ico" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M12 7v14"/><path d="M3 18a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1h5a4 4 0 0 1 4 4 4 4 0 0 1 4-4h5a1 1 0 0 1 1 1v13a1 1 0 0 1-1 1h-6a3 3 0 0 0-3 3 3 3 0 0 0-3-3z"/>
+          </svg>
+        </span>
+        <span class="txt">
+          <b>E-book Agenda Cheia</b>
+          <small>Para profissionais da beleza</small>
+        </span>
+        <svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9 18 6-6-6-6"/></svg>
+      </a>
+
+      <a class="link reveal" href="https://share.google/2PoqMoWbBWIQeOC11" rel="noopener">
+        <span class="ico" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M11.5 2.8a.55.55 0 0 1 1 0l2.3 4.7a2 2 0 0 0 1.5 1.1l5.2.75a.53.53 0 0 1 .3.9l-3.75 3.65a2 2 0 0 0-.6 1.85l.88 5.15a.53.53 0 0 1-.77.55L12.9 19.1a2 2 0 0 0-1.9 0l-4.6 2.4a.53.53 0 0 1-.78-.55l.88-5.15a2 2 0 0 0-.6-1.87L2.15 10.3a.53.53 0 0 1 .3-.9l5.17-.76a2 2 0 0 0 1.6-1.16z"/>
+          </svg>
+        </span>
+        <span class="txt">
+          <b>Avalie no Google</b>
+          <small>Conte como foi sua experiência</small>
+        </span>
+        <svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9 18 6-6-6-6"/></svg>
+      </a>
+
+    </nav>
+  </div>
+
+  <footer class="reveal">
+    <div class="rule"></div>
+    <!-- [EDITAR] quando ela passar horário e endereço, troque estas duas linhas -->
+    Tratamentos faciais personalizados<br>
+    Praia Grande &middot; SP
+  </footer>
+
+</main>
+
+<script>
+/* ═══════════════════════════════════════════════════════════════
+   LINKS PELA PLANILHA
+
+   A Jade edita uma planilha do Google e a página se atualiza sozinha.
+   Se a planilha não responder, os links escritos acima continuam
+   valendo — a página nunca fica sem links.
+
+   [EDITAR] Cole abaixo o endereço CSV publicado da planilha.
+   Passo a passo em: entrega/COMO-EDITAR-OS-LINKS.txt
+   ═══════════════════════════════════════════════════════════════ */
+const PLANILHA = "https://docs.google.com/spreadsheets/d/e/2PACX-1vQ6Pm7MOG1Sk01VQDQQWJxKQC-suznuMMGUxao8S4gz04cvI0oFXDGXcCBtIbA15h464wsVR9xPJDuJ/pub?gid=462216574&single=true&output=csv";
+
+(function () {
+  "use strict";
+  if (!PLANILHA) return;
+
+  var ICONES = {
+    agenda:   '<path d="M8 2v4"/><path d="M16 2v4"/><rect width="18" height="18" x="3" y="4" rx="2"/><path d="M3 10h18"/><path d="m9 16 2 2 4-4"/>',
+    grupo:    '<path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/>',
+    ebook:    '<path d="M12 7v14"/><path d="M3 18a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1h5a4 4 0 0 1 4 4 4 4 0 0 1 4-4h5a1 1 0 0 1 1 1v13a1 1 0 0 1-1 1h-6a3 3 0 0 0-3 3 3 3 0 0 0-3-3z"/>',
+    estrela:  '<path d="M11.5 2.8a.55.55 0 0 1 1 0l2.3 4.7a2 2 0 0 0 1.5 1.1l5.2.75a.53.53 0 0 1 .3.9l-3.75 3.65a2 2 0 0 0-.6 1.85l.88 5.15a.53.53 0 0 1-.77.55L12.9 19.1a2 2 0 0 0-1.9 0l-4.6 2.4a.53.53 0 0 1-.78-.55l.88-5.15a2 2 0 0 0-.6-1.87L2.15 10.3a.53.53 0 0 1 .3-.9l5.17-.76a2 2 0 0 0 1.6-1.16z"/>',
+    local:    '<path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0z"/><circle cx="12" cy="10" r="3"/>',
+    presente: '<rect x="3" y="8" width="18" height="4" rx="1"/><path d="M12 8v13"/><path d="M19 12v7a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2v-7"/><path d="M7.5 8a2.5 2.5 0 0 1 0-5C11 3 12 8 12 8s1-5 4.5-5a2.5 2.5 0 0 1 0 5"/>',
+    coracao:  '<path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"/>',
+    site:     '<circle cx="12" cy="12" r="10"/><path d="M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20"/><path d="M2 12h20"/>',
+    link:     '<path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/>'
+  };
+  var CHEVRON = '<path d="m9 18 6-6-6-6"/>';
+
+  function svg(paths, classe) {
+    return '<svg ' + (classe ? 'class="' + classe + '" ' : '') +
+      'viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" ' +
+      'stroke-linejoin="round" aria-hidden="true">' + paths + '</svg>';
+  }
+
+  /* tira acento e caixa, pra ela poder escrever o cabeçalho como quiser */
+  function normalizar(s) {
+    return (s || "").normalize("NFD").replace(/[̀-ͯ]/g, "")
+      .trim().toLowerCase();
+  }
+
+  /* CSV com aspas, vírgula dentro do campo e quebra de linha */
+  function lerCSV(t) {
+    var linhas = [], linha = [], campo = "", dentro = false, i, c;
+    t = t.replace(/\r\n/g, "\n").replace(/\r/g, "\n");
+    for (i = 0; i < t.length; i++) {
+      c = t.charAt(i);
+      if (dentro) {
+        if (c === '"') {
+          if (t.charAt(i + 1) === '"') { campo += '"'; i++; }
+          else dentro = false;
+        } else campo += c;
+      } else if (c === '"') dentro = true;
+      else if (c === ",") { linha.push(campo); campo = ""; }
+      else if (c === "\n") { linha.push(campo); linhas.push(linha); linha = []; campo = ""; }
+      else campo += c;
+    }
+    if (campo !== "" || linha.length) { linha.push(campo); linhas.push(linha); }
+    return linhas;
+  }
+
+  /* só http/https — bloqueia javascript: vindo da planilha */
+  function urlSegura(u) {
+    try {
+      var p = new URL(String(u).trim(), location.href).protocol;
+      return (p === "http:" || p === "https:") ? String(u).trim() : null;
+    } catch (e) { return null; }
+  }
+
+  function montarCartao(item) {
+    var a = document.createElement("a");
+    a.className = "link" + (item.destaque ? " link--primary" : "");
+    a.href = item.link;
+      a.rel = "noopener";
+
+    var ico = document.createElement("span");
+    ico.className = "ico";
+    ico.setAttribute("aria-hidden", "true");
+    ico.innerHTML = svg(ICONES[item.icone] || ICONES.link);
+
+    var txt = document.createElement("span");
+    txt.className = "txt";
+    var b = document.createElement("b");
+    b.textContent = item.titulo;
+    txt.appendChild(b);
+    if (item.descricao) {
+      var s = document.createElement("small");
+      s.textContent = item.descricao;
+      txt.appendChild(s);
+    }
+
+    var chev = document.createElement("span");
+    chev.innerHTML = svg(CHEVRON, "chev");
+
+    a.appendChild(ico);
+    a.appendChild(txt);
+    a.appendChild(chev.firstChild);
+    return a;
+  }
+
+  fetch(PLANILHA, { cache: "no-store" })
+    .then(function (r) { return r.ok ? r.text() : Promise.reject(r.status); })
+    .then(function (texto) {
+      var linhas = lerCSV(texto).filter(function (l) {
+        return l.join("").trim() !== "";
+      });
+      if (linhas.length < 2) return;
+
+      var cab = linhas[0].map(normalizar);
+      var col = {
+        titulo:    cab.indexOf("titulo"),
+        descricao: cab.indexOf("descricao"),
+        link:      cab.indexOf("link"),
+        icone:     cab.indexOf("icone"),
+        destaque:  cab.indexOf("destaque")
+      };
+      if (col.titulo < 0 || col.link < 0) return;   // cabeçalho errado: não mexe
+
+      var itens = [];
+      linhas.slice(1).forEach(function (l) {
+        var titulo = (l[col.titulo] || "").trim();
+        var link = urlSegura(l[col.link]);
+        if (!titulo || !link) return;               // linha incompleta: ignora só ela
+        itens.push({
+          titulo: titulo,
+          descricao: col.descricao > -1 ? (l[col.descricao] || "").trim() : "",
+          link: link,
+          icone: col.icone > -1 ? normalizar(l[col.icone]) : "link",
+          destaque: col.destaque > -1 && normalizar(l[col.destaque]).indexOf("s") === 0
+        });
+      });
+      if (!itens.length) return;                    // planilha vazia: mantém o embutido
+
+      var nav = document.querySelector(".links");
+      nav.textContent = "";
+      itens.forEach(function (item) { nav.appendChild(montarCartao(item)); });
+    })
+    .catch(function () { /* silêncio proposital: os links embutidos seguem no ar */ });
+})();
+</script>
+
+</body>
+</html>

@@ -1,0 +1,107 @@
+══════════════════════════════════════════════════════════════
+  COMO EDITAR OS LINKS DA SUA BIO
+  Jade Romero — Estética e Beleza
+══════════════════════════════════════════════════════════════
+
+Seus links ficam numa planilha do Google. Você edita a planilha,
+salva, e a sua página se atualiza sozinha. Não precisa mexer em
+nada de programação, nem avisar ninguém.
+
+
+──────────────────────────────────────────────────────────────
+PARTE 1 — MONTAGEM (só uma vez, feita pelo Matheus)
+──────────────────────────────────────────────────────────────
+
+1. Abrir https://sheets.google.com e criar uma planilha em branco.
+
+2. Menu Arquivo > Importar > Fazer upload
+   e enviar o arquivo "planilha-modelo.csv" que veio junto.
+   Escolher "Substituir planilha".
+
+3. Menu Arquivo > Compartilhar > Publicar na Web.
+   - Na primeira caixa, escolher a aba (Página1).
+   - Na segunda caixa, escolher "Valores separados por vírgula (.csv)".
+   - Clicar em Publicar e confirmar.
+
+4. Copiar o endereço que aparecer. Ele é comprido e termina
+   com "output=csv".
+
+5. Colar esse endereço no arquivo index.html, na linha que diz:
+
+       const PLANILHA = "";
+
+   ficando assim:
+
+       const PLANILHA = "https://docs.google.com/.../pub?...output=csv";
+
+6. Reenviar a pasta para a hospedagem. Pronto — daqui pra frente
+   a Jade mexe só na planilha.
+
+
+──────────────────────────────────────────────────────────────
+PARTE 2 — O DIA A DIA (Jade)
+──────────────────────────────────────────────────────────────
+
+Abra a planilha e edite normalmente. Cada LINHA é um botão da
+sua página, na mesma ordem em que aparecem lá.
+
+As colunas são estas:
+
+  destaque   Escreva "sim" no botão principal, o que você mais
+             quer que as pessoas cliquem. Ele fica dourado e
+             maior. Nos outros, escreva "nao".
+             Use "sim" em um só.
+
+  icone      O desenho que aparece do lado esquerdo.
+             Escolha um da lista:
+
+                agenda     calendário (agendamento)
+                grupo      pessoas (grupo de WhatsApp)
+                ebook      livro aberto (material, curso)
+                estrela    estrela (avaliação)
+                local      alfinete de mapa (endereço)
+                presente   presente (promoção, brinde)
+                coracao    coração (depoimento, indicação)
+                link       corrente (qualquer outra coisa)
+
+             Se escrever errado, aparece o de corrente. Nada quebra.
+
+  titulo     O nome do botão. Curto. Ex.: "Agendamentos"
+
+  descricao  A frase pequena embaixo do nome.
+             Deixe curta, para caber numa linha só.
+
+  link       O endereço completo, começando com https://
+
+
+REGRAS QUE VALE SABER
+─────────────────────
+
+• Para ESCONDER um botão, apague a linha inteira
+  (clique com o botão direito no número da linha > Excluir linha).
+
+• Para ADICIONAR um botão, escreva numa linha nova embaixo.
+
+• Para MUDAR A ORDEM, arraste a linha para cima ou para baixo.
+
+• O ideal são 4 ou 5 botões. Muito botão faz a pessoa não
+  escolher nenhum.
+
+• Não apague nem renomeie a primeira linha (a dos títulos das
+  colunas). É ela que a página usa para se orientar.
+
+• As mudanças aparecem em alguns minutos. Se não aparecer na
+  hora, atualize a página.
+
+
+SE ALGO DER ERRADO
+──────────────────
+
+A página foi feita para nunca ficar sem links. Se a planilha
+estiver fora do ar, com a primeira linha apagada ou vazia, ela
+volta sozinha a mostrar os quatro links originais.
+
+Linha com o título ou o link em branco é simplesmente pulada —
+as outras continuam funcionando normalmente.
+
+══════════════════════════════════════════════════════════════
