@@ -11,7 +11,7 @@ um **site institucional** e uma **página de links para a bio do Instagram**.
 ---
 
 ## O site
-
+ 
 Uma página única, editorial e contada pela rolagem. Cada seção apresenta um lado do
 trabalho dela e todas levam ao mesmo lugar: o agendamento pelo WhatsApp.
 
